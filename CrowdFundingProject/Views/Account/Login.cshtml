@@ -1,23 +1,29 @@
 ﻿@model CrowdFundingProject.ViewModels.LoginViewModel
 
-<h2>Вход в приложение</h2>
-<form method="post" asp-controller="Account" asp-action="Login">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div>
-        <label asp-for="Password"></label><br />
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="RememberMe"></label><br />
-        <input asp-for="RememberMe" />
-    </div>
-    <div>
-        <input type="submit" value="Войти" />
-    </div>
-</form>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v10.0&appId=1588796354649778&autoLogAppEvents=1" nonce="lWA13DNO"></script>
+    <h2>Вход в приложение</h2>
+    <form method="post" asp-controller="Account" asp-action="Login">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <label asp-for="Email"></label><br />
+            <input asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <label asp-for="Password"></label><br />
+            <input asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <label asp-for="RememberMe"></label><br />
+            <input asp-for="RememberMe" />
+        </div>
+        <div>
+            <input type="submit" value="Войти" />
+        </div>
+
+    </form>
+    <div class="fb-login-button" data-width="" data-size="large"
+         data-button-type="continue_with" data-layout="default" data-auto-logout-link="false"
+         data-use-continue-as="false"></div>

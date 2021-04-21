@@ -14,5 +14,6 @@ namespace CrowdFundingProject.Models
         {
             Database.EnsureCreated();
         }
+        public DbSet<Company> MyProperty { get; set; }
     }
 }

@@ -24,6 +24,12 @@ namespace CrowdFundingProject.Controllers
         {
             return View();
         }
+        [HttpPost, Route("WebHook")]
+        public async Task<IActionResult> WebHook(string a)
+        {
+
+            return RedirectToAction("Index", "Home");
+        }
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {

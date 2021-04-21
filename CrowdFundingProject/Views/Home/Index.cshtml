@@ -6,6 +6,10 @@
 @if (User.Identity.IsAuthenticated)
 {
     <h3>Hello!</h3>
+   @if (User.IsInRole("admin"))
+   {
+       <a asp-controller="Roles" asp-action="Index">Управление пользователями</a>
+   }
 }
 else
 {

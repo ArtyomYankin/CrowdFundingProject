@@ -23,7 +23,6 @@ namespace CrowdFundingProject
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>(options =>
@@ -38,10 +37,20 @@ namespace CrowdFundingProject
             })
                 .AddEntityFrameworkStores<ApplicationContext>();
 
+            services.AddAuthentication()
+                //.AddGoogle(options =>
+                //{
+                //    options.ClientId = Configuration["App:GoogleClientId"];
+                //    options.ClientSecret = Configuration["App:GoogleClientSecret"];
+                //})
+                .AddFacebook(options =>
+                {
+                    options.ClientId = Configuration["App:FacebookClientId"];
+                    options.ClientSecret = Configuration["App:FacebookClientSecret"];
+                });
             services.AddControllersWithViews();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -51,7 +60,6 @@ namespace CrowdFundingProject
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

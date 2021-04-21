@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 namespace CrowdFundingProject.Controllers
 {
     [Authorize(Roles = "admin")]
-    public class AdminController : Controller
+    public class RolesController : Controller
     {
         
         RoleManager<IdentityRole> _roleManager;
         UserManager<User> _userManager;
-        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -55,6 +55,29 @@ namespace CrowdFundingProject.Controllers
             return RedirectToAction("UserList");
         }
         [HttpPost]
+        public async Task<ActionResult> BlockUser(string id)
+        {
+            DateTime newDateTime = new DateTime(9999, 12, 30);
+            User user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                IdentityResult result = await _userManager.SetLockoutEndDateAsync(user, newDateTime);
+                _userManager.Users.Where(e => e.Id == user.Id).FirstOrDefault().IsBlocked = true;
+            }
+            return RedirectToAction("UserList");
+        }
+        [HttpPost]
+        public async Task<ActionResult> UnblockUser(string id)
+        {
+            User user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                IdentityResult result = await _userManager.SetLockoutEndDateAsync(user, null);
+                user.IsBlocked = false;
+            }
+            return RedirectToAction("UserList");
+        }
+        [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
             IdentityRole role = await _roleManager.FindByIdAsync(id);
@@ -69,11 +92,9 @@ namespace CrowdFundingProject.Controllers
 
         public async Task<IActionResult> Edit(string userId)
         {
-            // получаем пользователя
             User user = await _userManager.FindByIdAsync(userId);
             if (user != null)
             {
-                // получем список ролей пользователя
                 var userRoles = await _userManager.GetRolesAsync(user);
                 var allRoles = _roleManager.Roles.ToList();
                 ChangeRoleViewModel model = new ChangeRoleViewModel
@@ -91,17 +112,12 @@ namespace CrowdFundingProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(string userId, List<string> roles)
         {
-            // получаем пользователя
             User user = await _userManager.FindByIdAsync(userId);
             if (user != null)
             {
-                // получем список ролей пользователя
                 var userRoles = await _userManager.GetRolesAsync(user);
-                // получаем все роли
                 var allRoles = _roleManager.Roles.ToList();
-                // получаем список ролей, которые были добавлены
                 var addedRoles = roles.Except(userRoles);
-                // получаем роли, которые были удалены
                 var removedRoles = userRoles.Except(roles);
 
                 await _userManager.AddToRolesAsync(user, addedRoles);
