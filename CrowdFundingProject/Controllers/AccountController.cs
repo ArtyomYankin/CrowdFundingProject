@@ -37,7 +37,7 @@ namespace CrowdFundingProject.Controllers
             {
                 User user = new User { Email = model.Email, UserName = model.Email};
                 var result = await _userManager.CreateAsync(user, model.Password);
-                result = await _userManager.AddToRoleAsync(user, "user");
+                //result = await _userManager.AddToRoleAsync(user, "user");
                 if (result.Succeeded)
                 { 
                     await _signInManager.SignInAsync(user, false);

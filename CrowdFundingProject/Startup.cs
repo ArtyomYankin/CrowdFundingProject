@@ -25,7 +25,7 @@ namespace CrowdFundingProject
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<User, IdentityRole>(opts =>
@@ -35,7 +35,7 @@ namespace CrowdFundingProject
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireNonAlphanumeric = false;
             })
-                .AddEntityFrameworkStores<ApplicationContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthentication()
                 //.AddGoogle(options =>

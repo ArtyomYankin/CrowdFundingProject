@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace CrowdFundingProject.Models
 {
-    public class ApplicationContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
             Database.EnsureCreated();
         }
-        public DbSet<Company> MyProperty { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

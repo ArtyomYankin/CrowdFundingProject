@@ -7,8 +7,12 @@ namespace CrowdFundingProject.Models
 {
     public class Company
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string CategoryId { get; set; }
+        public string ShortDescription { get; set; }
+        public string LongDescription { get; set; }
+        public decimal MoneyNeeded { get; set; }
+        public string ImageLink { get; set; }
+        public ICollection<CompanyCategory> Categories { get; set; }
     }
 }
