@@ -1,3 +1,6 @@
+using CrowdFundingProject.Data.Interfaces;
+using CrowdFundingProject.Data.Repository;
+using CrowdFundingProject.Interfaces;
 using CrowdFundingProject.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +30,8 @@ namespace CrowdFundingProject
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddTransient<ICompanyRepository, CompanyRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddIdentity<User, IdentityRole>(opts =>
             {
                 opts.Password.RequiredLength = 0;

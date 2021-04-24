@@ -17,7 +17,7 @@ namespace CrowdFundingProject.Companies
         {
             _context.Companies.Add(new Company
             {
-                Id = id,
+                CompanyId = id,
                 Name = Name,
                 LongDescription = Description
             });
