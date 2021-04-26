@@ -1,14 +1,25 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model IEnumerable<CrowdFundingProject.Models.Company>
-<form class="row mt-5 mb-2">
-    @{
-        foreach (var comp in Model)
-        {
-            <div class="col-lg-4">
-                <img src="@comp.ImageLink" height="200" alt="@comp.Name" />
-                <h2>@comp.Name</h2>
-                <p>Desc: @comp.LongDescription</p>
-            </div>
-        }
-    }
-</form>
+
+        <form class="row mt-5 mb-2">
+            @{
+                foreach (var comp in Model)
+                {
+                    <div class="col-lg-4">
+                        <img src="@comp.ImageLink" height="300" alt="@comp.Name" />
+                        <h2>@comp.Name</h2>
+                        <p>Category: @comp.Category.CategoryName</p>
+                        <p>Long Description: @comp.LongDescription</p>
+                        <p>Money needed: @comp.MoneyNeeded</p>
+                        <p>Date of start: @comp.CreationDate.ToShortDateString()</p>
+                        <p>@comp.UserId</p>
+                    </div>
+                }
+            }
+        </form>
+   
+<style>
+ .col-lg-4{
+     margin:30px;
+ }
+</style>

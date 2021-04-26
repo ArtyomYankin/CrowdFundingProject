@@ -13,23 +13,20 @@ namespace CrowdFundingProject.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly ApplicationDbContext _context;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
-        [HttpPost, Route("WebHook")]
-        public async Task<IActionResult> WebHook(string a)
-        {
-
-            return RedirectToAction("Index", "Home");
-        }
+        public IActionResult Index() => View("UserPage", _context.Companies.ToList());
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -93,6 +90,11 @@ namespace CrowdFundingProject.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public IActionResult UserPage()
+        {
+            return RedirectToAction("UserPage", "Account");
         }
     }
 }

@@ -4,33 +4,39 @@
 }
 
 
+
+<h3>Hello!</h3>
+@if (User.IsInRole("admin"))
+{
+    <a asp-controller="Roles" asp-action="Index">Управление пользователями</a>
+}
+
+<div class="row mt-5 mb-2">
+    @{
+        foreach (var comp in Model)
+        {
+            <form class="col-lg-4">
+                <img src="@comp.ImageLink" height="200" alt="@comp.Name" />
+                <div class="form-group">
+                    <input type="submit" value="@comp.Name" name="companyName" asp-controller="Company" asp-action="ThisCompany" class="btn btn-outline-dark" />
+                </div>
+                <p>@comp.Name</p>
+                <p>Краткое описание: @comp.ShortDescription</p>
+            </form>
+        }
+    }
+</div>
 @if (User.Identity.IsAuthenticated)
 {
-    <h3>Hello!</h3>
-    @if (User.IsInRole("admin"))
-    {
-        <a asp-controller="Roles" asp-action="Index">Управление пользователями</a>
-    }
     <li class="nav-item active">
-        <a class="nav-link" href="/Home/Create">New <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/Home/Create">Create Company <span class="sr-only">(current)</span></a>
     </li>
-    <div class="row mt-5 mb-2">
-        @{
-            foreach (var comp in Model)
-            {
-                <form class="col-lg-4">
-                    <img src="@comp.ImageLink" height="200" alt="@comp.Name" />
-                    <div class="form-group">
-                        <input type="submit" value="@comp.Name" name="companyName" asp-controller="Company" asp-action="ThisCompany" class="btn btn-outline-dark" />
-                    </div>
-                    <p>@comp.Name</p>
-                    <p>Краткое описание: @comp.ShortDescription</p>
-                </form>
-            }
-        }
-    </div>
+    <li class="nav-item active">
+        <a class="nav-link" asp-controller="Account" asp-action="Index">Create Company <span class="sr-only">(current)</span></a>
+    </li>
+    <a>Управление пользователями</a>
 }
 else
 {
-    <h3>Sign In!</h3>
+    <h3>Sign In to create your own Company.</h3>
 }

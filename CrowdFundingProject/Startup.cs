@@ -1,3 +1,4 @@
+using CrowdFundingProject.Data;
 using CrowdFundingProject.Data.Interfaces;
 using CrowdFundingProject.Data.Repository;
 using CrowdFundingProject.Interfaces;
@@ -73,7 +74,7 @@ namespace CrowdFundingProject
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

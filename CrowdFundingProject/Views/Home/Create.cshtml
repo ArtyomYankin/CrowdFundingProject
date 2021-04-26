@@ -24,6 +24,22 @@
     @Html.LabelFor(model => model.LongDescription, "LongDescription")
     <br />
     @Html.EditorFor(model => model.LongDescription)
+    <br />
+    @*<br />
+    @Html.LabelFor(model => model.CategoryId, "CategoryId")
+    <br />
+    @Html.EditorFor(model => model.CategoryId)
+    <br />*@
+    <br />
+    @Html.LabelFor(model => model.MoneyNeeded, "MoneyNeeded")
+    <br />
+    @Html.EditorFor(model => model.MoneyNeeded)
+    <br />
+    <br />
+    @Html.LabelFor(model => model.Category.CategoryName, "CategoryName")
+    <br />
+    @Html.EditorFor(model => model.Category.CategoryName)
+    //@Html.DropDownListFor(Model.Category, new SelectList(foreach (var name in Model)){Model.Category.CategoryName })
     <div class="editor-field invisible">
         @Html.EditorFor(model => model.ImageLink)
     </div>

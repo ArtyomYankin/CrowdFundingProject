@@ -1,4 +1,6 @@
-﻿using CrowdFundingProject.Models;
+﻿using CrowdFundingProject.Data.Repository;
+using CrowdFundingProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,12 +13,13 @@ namespace CrowdFundingProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
+
 
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
+
         }
 
         public IActionResult Index()
@@ -42,11 +45,14 @@ namespace CrowdFundingProject.Controllers
         [HttpPost]
         public IActionResult Create(Company company)
         {
+            company.CreationDate = DateTime.Now;
+            company.UserId = User.Identity.Name;
             _context.Companies.Add(company);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
         [HttpPost]
         public IActionResult CompList() => View(_context.Companies.ToList());
+     
     }
 }

@@ -10,5 +10,6 @@ namespace CrowdFundingProject.Models
     {
         public string Name { get; set; }
         public bool IsBlocked { get; set; }
+        public int CompanyId { get; set; }
     }
 }

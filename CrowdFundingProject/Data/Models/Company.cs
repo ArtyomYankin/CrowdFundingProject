@@ -15,6 +15,10 @@ namespace CrowdFundingProject.Models
         public bool IsFavorite { get; set; }
         public string ImageLink { get; set; }
         public int CategoryId { get; set; }
+        public string UserId { get; set; }
+        public virtual User User { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime EndDate { get; set; }
         public virtual Category Category { get; set; }
     }
 }

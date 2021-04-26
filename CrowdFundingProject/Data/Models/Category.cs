@@ -9,6 +9,7 @@ namespace CrowdFundingProject.Models
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
+        public string Description { get; set; }
         public List<Company> Companies { get; set; }
     }
 }

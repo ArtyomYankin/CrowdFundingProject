@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CrowdFundingProject.Data.Interfaces
 {
-    public class ICategoryRepository
+    public interface ICategoryRepository
     {
         IEnumerable<Category> Categories { get; }
     }

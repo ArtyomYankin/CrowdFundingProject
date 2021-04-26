@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CrowdFundingProject.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,32 +49,17 @@ namespace CrowdFundingProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Companies",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MoneyNeeded = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ImageLink = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Companies", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
                 });
 
             migrationBuilder.CreateTable(
@@ -184,28 +169,27 @@ namespace CrowdFundingProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CompanyCategory",
+                name: "Companies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    CompanyId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShortDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LongDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MoneyNeeded = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IsFavorite = table.Column<bool>(type: "bit", nullable: false),
+                    ImageLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CompanyCategory", x => x.Id);
+                    table.PrimaryKey("PK_Companies", x => x.CompanyId);
                     table.ForeignKey(
-                        name: "FK_CompanyCategory_Category_CategoryId",
+                        name: "FK_Companies_Categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CompanyCategory_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -249,14 +233,9 @@ namespace CrowdFundingProject.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CompanyCategory_CategoryId",
-                table: "CompanyCategory",
+                name: "IX_Companies_CategoryId",
+                table: "Companies",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CompanyCategory_CompanyId",
-                table: "CompanyCategory",
-                column: "CompanyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -277,7 +256,7 @@ namespace CrowdFundingProject.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CompanyCategory");
+                name: "Companies");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -286,10 +265,7 @@ namespace CrowdFundingProject.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "Companies");
+                name: "Categories");
         }
     }
 }

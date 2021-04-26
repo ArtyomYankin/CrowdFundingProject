@@ -21,30 +21,39 @@ namespace CrowdFundingProject.Migrations
 
             modelBuilder.Entity("CrowdFundingProject.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("CrowdFundingProject.Models.Company", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("CrowdFundingProject.Models.Company", b =>
+                {
+                    b.Property<int>("CompanyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsFavorite")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LongDescription")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("MoneyNeeded")
@@ -53,31 +62,14 @@ namespace CrowdFundingProject.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("ShortDescription")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("CrowdFundingProject.Models.CompanyCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("CompanyId");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("CompanyCategory");
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("CrowdFundingProject.Models.User", b =>
@@ -282,7 +274,7 @@ namespace CrowdFundingProject.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CrowdFundingProject.Models.CompanyCategory", b =>
+            modelBuilder.Entity("CrowdFundingProject.Models.Company", b =>
                 {
                     b.HasOne("CrowdFundingProject.Models.Category", "Category")
                         .WithMany("Companies")
@@ -290,15 +282,7 @@ namespace CrowdFundingProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CrowdFundingProject.Models.Company", "Company")
-                        .WithMany("Categories")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Category");
-
-                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -355,11 +339,6 @@ namespace CrowdFundingProject.Migrations
             modelBuilder.Entity("CrowdFundingProject.Models.Category", b =>
                 {
                     b.Navigation("Companies");
-                });
-
-            modelBuilder.Entity("CrowdFundingProject.Models.Company", b =>
-                {
-                    b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618
         }

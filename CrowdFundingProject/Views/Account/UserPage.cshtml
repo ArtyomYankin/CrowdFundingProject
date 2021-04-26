@@ -1,0 +1,14 @@
+﻿@model IEnumerable<CrowdFundingProject.Models.Company>
+<p>@User.Identity.Name</p>
+<h2>List of your companies:</h2>
+<div class="row mt-5 mb-2">
+    @{
+        foreach (var userComp in Model)
+        {
+            if (userComp.UserId == User.Identity.Name)
+            {
+                <p>@userComp.Name</p>
+            }
+        }
+    }
+</div>
