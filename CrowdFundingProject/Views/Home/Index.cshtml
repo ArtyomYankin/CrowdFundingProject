@@ -18,7 +18,7 @@
             <form class="col-lg-4">
                 <img src="@comp.ImageLink" height="200" alt="@comp.Name" />
                 <div class="form-group">
-                    <input type="submit" value="@comp.Name" name="companyName" asp-controller="Company" asp-action="ThisCompany" class="btn btn-outline-dark" />
+                    <input type="submit" value="@comp.CompanyId" name="companyId" asp-controller="Company" asp-action="ThisCompany" class="btn btn-outline-dark" />
                 </div>
                 <p>@comp.Name</p>
                 <p>Краткое описание: @comp.ShortDescription</p>
@@ -31,10 +31,6 @@
     <li class="nav-item active">
         <a class="nav-link" href="/Home/Create">Create Company <span class="sr-only">(current)</span></a>
     </li>
-    <li class="nav-item active">
-        <a class="nav-link" asp-controller="Account" asp-action="Index">Create Company <span class="sr-only">(current)</span></a>
-    </li>
-    <a>Управление пользователями</a>
 }
 else
 {

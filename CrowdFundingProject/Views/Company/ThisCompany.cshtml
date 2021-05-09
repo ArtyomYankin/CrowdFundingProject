@@ -1,25 +1,66 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model IEnumerable<CrowdFundingProject.Models.Company>
+@model CrowdFundingProject.Models.Company
+<form class="row mt-5 mb-2">
+    @{
 
-        <form class="row mt-5 mb-2">
-            @{
-                foreach (var comp in Model)
-                {
-                    <div class="col-lg-4">
-                        <img src="@comp.ImageLink" height="300" alt="@comp.Name" />
-                        <h2>@comp.Name</h2>
-                        <p>Category: @comp.Category.CategoryName</p>
-                        <p>Long Description: @comp.LongDescription</p>
-                        <p>Money needed: @comp.MoneyNeeded</p>
-                        <p>Date of start: @comp.CreationDate.ToShortDateString()</p>
-                        <p>@comp.UserId</p>
-                    </div>
-                }
+
+        <div>
+            <img src="@Model.ImageLink" height="300" alt="@Model.Name" />
+            <h2>@Model.Name</h2>
+            <p>Category: @Model.Category.CategoryName</p>
+            <div class="text-lg-left"> Long Description: @Model.LongDescription</div>
+            <p>Money needed: @Model.MoneyNeeded</p>
+            <p>Date of start: @Model.CreationDate.ToShortDateString()</p>
+            <p>Date of ending: @Model.EndDate.ToShortDateString()</p>
+            <p>@Model.UserId</p>
+            <p>@Model.Category.CategoryName</p>
+            @if (User.Identity.Name == Model.UserId)
+            {
+                <div class="form-group">
+                    <input type="submit" value="@Model.CompanyId" name="companyId" asp-controller="Company" asp-action="Create" class="btn btn-outline-dark" />
+                </div>
             }
-        </form>
-   
-<style>
- .col-lg-4{
-     margin:30px;
- }
-</style>
+            <p>@Model.CompanyNews</p>
+            @*<div>@{ 
+                @foreach (var news in Model.CompanyNews)
+                {
+                    <img src="@news.ImageLink" height="200" alt="@Model.Name" />
+                    <h3>@news.NewsName</h3>
+                    <p>@news.Description</p>
+                    <p>@news.DatePost</p>
+                    }
+                }
+            </div>*@
+        </div>
+
+        <div>
+            @using (Html.BeginForm("Add", "CompanyComments", FormMethod.Post))
+                {
+                <div>
+                    <div class="form-group">
+                        <label class="col-md-12 custom-control-label">
+                            Your rating from 1 to 5:
+                        </label>
+                        @*@Html.LabelFor(model => model., "Name")
+                        <br />
+                        @Html.EditorFor(model => model.NewsName)*@
+                        <br />
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <textarea asp-for="CompanyComments" required rows="5" style="width:100%;" class="form-control"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <input type="hidden" asp-for="CompanyId" />
+                        <input type="hidden" name="Rating" id="Rating" value="0" />
+                        <input type="submit" id="btnRegister" name="btnRegister" value="Submit Comment" class="btn-dark" />
+                    </div>
+                </div>
+                }
+        </div>         
+               
+        
+    }
+</form>

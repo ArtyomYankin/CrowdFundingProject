@@ -17,7 +17,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Content\" />
     <Folder Include="Data\Repository\" />
+    <Folder Include="wwwroot\Image\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\jquery.rateyo.min.css" />
+    <None Include="wwwroot\lib\jquery\jquery.rateyo.min.js" />
   </ItemGroup>
 
 </Project>

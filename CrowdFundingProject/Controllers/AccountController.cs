@@ -91,10 +91,5 @@ namespace CrowdFundingProject.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-        [HttpPost]
-        public IActionResult UserPage()
-        {
-            return RedirectToAction("UserPage", "Account");
-        }
     }
 }

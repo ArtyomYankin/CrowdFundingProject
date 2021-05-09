@@ -42,6 +42,9 @@ namespace CrowdFundingProject.Controllers
         {
             return View();
         }
+
+      
+
         [HttpPost]
         public IActionResult Create(Company company)
         {
