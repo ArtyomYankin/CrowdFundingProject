@@ -18,10 +18,10 @@
             <form class="col-lg-4">
                 <img src="@comp.ImageLink" height="200" alt="@comp.Name" />
                 <div class="form-group">
-                    <input type="submit" value="@comp.CompanyId" name="companyId" asp-controller="Company" asp-action="ThisCompany" class="btn btn-outline-dark" />
+                    <input type="hidden" value="@comp.CompanyId" name="companyId" asp-controller="Company" asp-action="ThisCompany"/>
+                    <input type="submit" value="@comp.Name" name="companyName" asp-controller="Company" asp-action="ThisCompany" class="btn btn-outline-dark" />
                 </div>
-                <p>@comp.Name</p>
-                <p>Краткое описание: @comp.ShortDescription</p>
+                <p>Short Description: @comp.ShortDescription</p>
             </form>
         }
     }

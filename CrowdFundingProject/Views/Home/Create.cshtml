@@ -24,10 +24,11 @@
     @Html.TextAreaFor(model => model.LongDescription, 10, 100, null)
     <br />
     <br />
-    @Html.LabelFor(model => model.CategoryId, "CategoryId")
+    @Html.LabelFor(model => model.CategoryId, "CategoryId, 1-Music, 2-VideoGames,3-Education, 4-Sport, 5-StartUp")
     <br />
     @Html.EditorFor(model => model.CategoryId)
     <br />
+
     <br />
     @Html.LabelFor(model => model.MoneyNeeded, "MoneyNeeded")
     <br />
@@ -38,10 +39,7 @@
         <br />
         @Html.EditorFor(model => model.Category.CategoryName)*@
    // @Html.DropDownListFor(Model.Category, new SelectList(foreach (var name in Model)){Model.Category.CategoryName })
-    <br />
- 
-    @Html.DropDownListFor(model => model.Category.CategoryName, ViewBag.CategoryList as SelectList, new { @class = "form-control" });
-    <br />
+    
     @Html.LabelFor(model => model.EndDate, "EndDate")
     <br />
     @Html.EditorFor(model => model.EndDate)
