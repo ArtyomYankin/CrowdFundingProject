@@ -9,7 +9,7 @@
             <h2>@Model.Name</h2>
             <p>Category: @Model.Category.CategoryName</p>
             <div class="text-lg-left"> Long Description: @Model.LongDescription</div>
-            <p>Money needed: @Model.MoneyNeeded</p>
+            <p>Money collected: @Model.MoneyNow from @Model.MoneyNeeded</p>
             <p>Date of start: @Model.CreationDate.ToShortDateString()</p>
             <p>Date of ending: @Model.EndDate.ToShortDateString()</p>
             <p>@Model.UserId</p>
@@ -20,16 +20,21 @@
                     <input type="submit" value="@Model.CompanyId" name="companyId" asp-controller="Company" asp-action="Create" class="btn btn-outline-dark" />
                 </div>
             }
-            @*<div>@{ 
-                @foreach (var news in Model.CompanyNews)
-                {
-                    <img src="@news.ImageLink" height="200" alt="@Model.Name" />
-                    <h3>@news.NewsName</h3>
-                    <p>@news.Description</p>
-                    <p>@news.DatePost</p>
-                    }
+            <p>Want to support?</p>
+            <div class="form-group">
+                <input type="hidden" value="@Model.CompanyId" name="companyId" asp-controller="Payment" asp-action="MoneyTransfer" />
+                <input type="submit" value="Yes" name="moneyTransfer" asp-controller="Payment" asp-action="MoneyTransfer" class="btn btn-outline-dark" />
+            </div>
+            @*<div>@{
+            @foreach (var news in Model.CompanyNews)
+            {
+                <img src="@news.ImageLink" height="200" alt="@Model.Name" />
+                <h3>@news.NewsName</h3>
+                <p>@news.Description</p>
+                <p>@news.DatePost</p>
                 }
-            </div>*@
+            }
+        </div>*@
         </div>
 
         <div>

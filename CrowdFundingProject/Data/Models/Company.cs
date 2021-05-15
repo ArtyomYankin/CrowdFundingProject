@@ -13,6 +13,7 @@ namespace CrowdFundingProject.Models
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
         public decimal MoneyNeeded { get; set; }
+        public decimal MoneyNow { get; set; }
         public string ImageLink { get; set; }
         public int CategoryId { get; set; }
         public string UserId { get; set; }

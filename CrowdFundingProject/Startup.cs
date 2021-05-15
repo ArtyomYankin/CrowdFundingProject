@@ -20,9 +20,11 @@ namespace CrowdFundingProject
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IConfigurationRoot ICRoot;
+        public Startup(Microsoft.AspNetCore.Hosting.IHostingEnvironment configuration)
         {
-            Configuration = configuration;
+            ICRoot = new ConfigurationBuilder().SetBasePath(configuration.ContentRootPath).AddJsonFile("dbsettings.json").Build();
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -30,7 +32,7 @@ namespace CrowdFundingProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+               options.UseSqlServer(ICRoot.GetConnectionString("DefaultConnection")));
             services.AddTransient<ICompanyRepository, CompanyRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddIdentity<User, IdentityRole>(opts =>
@@ -42,17 +44,13 @@ namespace CrowdFundingProject
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddAuthentication()
+            services.AddAuthentication();
                 //.AddGoogle(options =>
                 //{
                 //    options.ClientId = Configuration["App:GoogleClientId"];
                 //    options.ClientSecret = Configuration["App:GoogleClientSecret"];
                 //})
-                .AddFacebook(options =>
-                {
-                    options.ClientId = Configuration["App:FacebookClientId"];
-                    options.ClientSecret = Configuration["App:FacebookClientSecret"];
-                });
+                
             services.AddControllersWithViews();
         }
 

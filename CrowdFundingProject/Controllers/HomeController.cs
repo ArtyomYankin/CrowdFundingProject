@@ -46,6 +46,7 @@ namespace CrowdFundingProject.Controllers
         public IActionResult Create(Company company)
         {
             company.CreationDate = DateTime.Now;
+            company.MoneyNow = 0;
             company.UserId = User.Identity.Name;
             _context.Companies.Add(company);
             _context.SaveChanges();

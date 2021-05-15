@@ -36,28 +36,6 @@ namespace CrowdFundingProject.Data
                     context.Categories.AddRange(Categories.Select(c => c.Value));
                 }
 
-                if (!context.Companies.Any())
-                {
-                    context.AddRange
-                    (
-                        new Company
-                        {
-                            Name = "RaceSimulator3000",
-                            ShortDescription = "New race videogame",
-                            LongDescription = "Videogame with new cars and new roads",
-                            ImageLink = "https://www.maximonline.ru/images/th/100/18/99844-MTE3NjM1OTk1Yg.jpg",
-                            Category = Categories["VideoGames"]
-                        },
-                        new Company
-                        {
-                            Name = "Goat",
-                            ShortDescription = "New album",
-                            LongDescription = "Writing new album 'Goat'",
-                            ImageLink = "https://upload.wikimedia.org/wikipedia/ru/e/e6/Goat_Simulator_logo.png",
-                            Category = Categories["Music"]
-                        }
-                    );
-                }
                 context.SaveChanges();
         }
         private static Dictionary<string, Category> Category;

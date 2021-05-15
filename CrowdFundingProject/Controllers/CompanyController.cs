@@ -31,25 +31,25 @@ namespace CrowdFundingProject.Controllers
             
             Company companies = _allCompanies.Companies.Where(i => i.CompanyId.Equals(companyId)).FirstOrDefault();
 
-            CompanyCommentViewModel vm = new CompanyCommentViewModel();
-            vm.CompanyId = companyId;
-            vm.Title = companies.Name;
-            var Comments = _context.CompanyComments.Where(p => p.CompanyId.Equals(companyId)).ToList();
-            var Ratings = _context.CompanyComments.Where(p => p.CompanyId.Equals(companyId)).ToList();
-            companies.CompanyComments = Comments;
-            if (Ratings.Count() > 0)
-            {
+            //CompanyCommentViewModel vm = new CompanyCommentViewModel();
+            //vm.CompanyId = companyId;
+            //vm.Title = companies.Name;
+            //var Comments = _context.CompanyComments.Where(p => p.CompanyId.Equals(companyId)).ToList();
+            //var Ratings = _context.CompanyComments.Where(p => p.CompanyId.Equals(companyId)).ToList();
+            //companies.CompanyComments = Comments;
+            //if (Ratings.Count() > 0)
+            //{
 
-                var RatingSum = Ratings.Sum(p => p.Rating);
-                ViewBag.RatingSum = RatingSum;
-                var RatingCount = Ratings.Count();
-                ViewBag.RatingCount = RatingCount;
-            }
-            else
-            {
-                ViewBag.RatingSum = 0;
-                ViewBag.RatingCount = 0;
-            }
+            //    var RatingSum = Ratings.Sum(p => p.Rating);
+            //    ViewBag.RatingSum = RatingSum;
+            //    var RatingCount = Ratings.Count();
+            //    ViewBag.RatingCount = RatingCount;
+            //}
+            //else
+            //{
+            //    ViewBag.RatingSum = 0;
+            //    ViewBag.RatingCount = 0;
+            //}
             return View(companies);
         }
         [HttpPost]

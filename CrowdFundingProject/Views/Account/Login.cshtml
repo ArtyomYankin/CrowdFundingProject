@@ -1,8 +1,6 @@
 ﻿@model CrowdFundingProject.ViewModels.LoginViewModel
 
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v10.0&appId=1588796354649778&autoLogAppEvents=1" nonce="lWA13DNO"></script>
-    <h2>Signig in</h2>
+   <h2>Signig in</h2>
     <form method="post" asp-controller="Account" asp-action="Login">
         <div asp-validation-summary="ModelOnly"></div>
         <div>
@@ -24,6 +22,3 @@
         </div>
 
     </form>
-    <div class="fb-login-button" data-width="" data-size="large"
-         data-button-type="continue_with" data-layout="default" data-auto-logout-link="false"
-         data-use-continue-as="false"></div>
