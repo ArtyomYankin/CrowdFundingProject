@@ -27,7 +27,7 @@ namespace CrowdFundingProject.Controllers
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> MoneyTransfer(int? companyId, decimal moneyTransfered)
+        public async Task<IActionResult> MoneyTransfer(int? companyId, double moneyTransfered)
         {
             if (companyId != null)
             {

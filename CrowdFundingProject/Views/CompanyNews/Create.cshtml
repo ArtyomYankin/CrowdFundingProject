@@ -1,4 +1,4 @@
-﻿@model CrowdFundingProject.Models.Company
+﻿@model CrowdFundingProject.Data.Models.CompanyNews
 
 <head>
     <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -7,42 +7,19 @@
     <script src="~/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 
-<h2>Create new project</h2>
+<h2>New News</h2>
 
 @using (Html.BeginForm())
 {
-    @Html.LabelFor(model => model.Name, "Name")
+    @Html.LabelFor(model => model.NewsName, "Name")
     <br />
-    @Html.EditorFor(model => model.Name)
-    <br />
-    @Html.LabelFor(model => model.ShortDescription, "ShortDescription")
-    <br />
-    @Html.TextAreaFor(model => model.ShortDescription, 2, 100, null)
-    <br />
-    @Html.LabelFor(model => model.LongDescription, "LongDescription")
-    <br />
-    @Html.TextAreaFor(model => model.LongDescription, 10, 100, null)
+    @Html.EditorFor(model => model.NewsName)
     <br />
     <br />
-    @Html.LabelFor(model => model.CategoryId, "CategoryId, 1-Music, 2-VideoGames,3-Education, 4-Sport, 5-StartUp")
+    @Html.LabelFor(model => model.Description, "ShortDescription", new {cols = 20, rows=30 })
     <br />
-    @Html.EditorFor(model => model.CategoryId)
+    @Html.EditorFor(model => model.Description)
     <br />
-
-    <br />
-    @Html.LabelFor(model => model.MoneyNeeded, "MoneyNeeded")
-    <br />
-    @Html.EditorFor(model => model.MoneyNeeded)
-    <br />
-    @* <br />
-        @Html.LabelFor(model => model.Category.CategoryName, "CategoryName")
-        <br />
-        @Html.EditorFor(model => model.Category.CategoryName)*@
-   // @Html.DropDownListFor(Model.Category, new SelectList(foreach (var name in Model)){Model.Category.CategoryName })
-    
-    @Html.LabelFor(model => model.EndDate, "EndDate")
-    <br />
-    @Html.EditorFor(model => model.EndDate)
     <div class="editor-field invisible">
         @Html.EditorFor(model => model.ImageLink)
     </div>
@@ -172,4 +149,3 @@
         }
     }
 </script>
-

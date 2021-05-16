@@ -12,12 +12,12 @@
             <p>Money collected: @Model.MoneyNow from @Model.MoneyNeeded</p>
             <p>Date of start: @Model.CreationDate.ToShortDateString()</p>
             <p>Date of ending: @Model.EndDate.ToShortDateString()</p>
-            <p>@Model.UserId</p>
-            <p>@Model.Category.CategoryName</p>
+            <p>Owner: @Model.UserId</p>
             @if (User.Identity.Name == Model.UserId)
             {
                 <div class="form-group">
-                    <input type="submit" value="@Model.CompanyId" name="companyId" asp-controller="Company" asp-action="Create" class="btn btn-outline-dark" />
+                    <input type="hidden" value="@Model.CompanyId" name="companyId" asp-controller="CompanyNews" asp-action="Create" class="btn btn-outline-dark" />
+                    <input type="submit" value="Publish news" name="publishNews" asp-controller="CompanyNews" asp-action="Create" class="btn btn-outline-dark" />
                 </div>
             }
             <p>Want to support?</p>
@@ -25,43 +25,15 @@
                 <input type="hidden" value="@Model.CompanyId" name="companyId" asp-controller="Payment" asp-action="MoneyTransfer" />
                 <input type="submit" value="Yes" name="moneyTransfer" asp-controller="Payment" asp-action="MoneyTransfer" class="btn btn-outline-dark" />
             </div>
-            @*<div>@{
-            @foreach (var news in Model.CompanyNews)
-            {
-                <img src="@news.ImageLink" height="200" alt="@Model.Name" />
-                <h3>@news.NewsName</h3>
-                <p>@news.Description</p>
-                <p>@news.DatePost</p>
-                }
-            }
-        </div>*@
-        </div>
-
-        <div>
-            @*@using (Html.BeginForm("Add", "CompanyComments", FormMethod.Post))
-        {
-        <div>
+            @*<div class="form-group">
+                <input type="hidden" value="@Model.CompanyId" name="companyId" asp-controller="Bonus" asp-action="Create" />
+                <input type="submit" value="Add bonus" name="bonus" asp-controller="Create" asp-action="Create" class="btn btn-outline-dark" />
+            </div>*@
+        <p>Here you can follow company news:</p>
             <div class="form-group">
-                <label class="col-md-12 custom-control-label">
-                    Your rating from 1 to 5:
-                </label>
-                <br />
+                <input type="hidden" value="@Model.CompanyId" name="companyId" asp-controller="CompanyNews" asp-action="Index" />
+                <input type="submit" value="Company News" name="news" asp-controller="CompanyNews" asp-action="Index" class="btn btn-outline-dark" />
             </div>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <textarea asp-for="CompanyComments" required rows="5" style="width:100%;" class="form-control"></textarea>
-                </div>
-
-            </div>
-            <div class="col-md-12">
-                <input type="hidden" asp-for="CompanyId" />
-                <input type="hidden" name="Rating" id="Rating" value="0" />
-                <input type="submit" id="btnRegister" name="btnRegister" value="Submit Comment" class="btn-dark" />
-            </div>
-        </div>
-        }*@
-        </div>         
-               
-        
+        </div>       
     }
 </form>

@@ -37,21 +37,7 @@ namespace CrowdFundingProject.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(Company company)
-        {
-            company.CreationDate = DateTime.Now;
-            company.MoneyNow = 0;
-            company.UserId = User.Identity.Name;
-            _context.Companies.Add(company);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        
         [HttpPost]
         public IActionResult CompList() => View(_context.Companies.ToList());
      

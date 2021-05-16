@@ -19,5 +19,6 @@ namespace CrowdFundingProject.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<CompanyComment> CompanyComments { get; set; }
         public DbSet<CompanyNews> CompanyNews { get; set; }
+        public DbSet<Bonus> Bonuses { get; set; }
     }
 }

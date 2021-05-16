@@ -25,31 +25,24 @@ namespace CrowdFundingProject.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Company company)
+        {
+            company.CreationDate = DateTime.Now;
+            company.MoneyNow = 0;
+            company.UserId = User.Identity.Name;
+            _context.Companies.Add(company);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
         public IActionResult ThisCompany(int companyId)
         {
-            //Company company = _context.Companies.Find(companyId);
-            
             Company companies = _allCompanies.Companies.Where(i => i.CompanyId.Equals(companyId)).FirstOrDefault();
-
-            //CompanyCommentViewModel vm = new CompanyCommentViewModel();
-            //vm.CompanyId = companyId;
-            //vm.Title = companies.Name;
-            //var Comments = _context.CompanyComments.Where(p => p.CompanyId.Equals(companyId)).ToList();
-            //var Ratings = _context.CompanyComments.Where(p => p.CompanyId.Equals(companyId)).ToList();
-            //companies.CompanyComments = Comments;
-            //if (Ratings.Count() > 0)
-            //{
-
-            //    var RatingSum = Ratings.Sum(p => p.Rating);
-            //    ViewBag.RatingSum = RatingSum;
-            //    var RatingCount = Ratings.Count();
-            //    ViewBag.RatingCount = RatingCount;
-            //}
-            //else
-            //{
-            //    ViewBag.RatingSum = 0;
-            //    ViewBag.RatingCount = 0;
-            //}
             return View(companies);
         }
         [HttpPost]
@@ -85,19 +78,6 @@ namespace CrowdFundingProject.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Account");
         }
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(CompanyNews companyNews, int companyId)
-        {
-            companyNews.CompanyId = companyId;
-            companyNews.DatePost = DateTime.Now;
-            _context.CompanyNews.Add(companyNews);
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Home");
-        }
+        
     }
 }
